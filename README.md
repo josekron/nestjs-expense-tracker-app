@@ -2,6 +2,8 @@
 
 Expense Tracker is an example of a full app built with Nestjs (Backend) and React (Frontend)
 
+This project can be improved but it was a take-home test with a time limit.
+
 ### Technologies
 
 expense-tracker-backend (Backend):
@@ -35,9 +37,3 @@ expense-tracker-front (Frontend):
 - docker build -t expensetrackerapp .
 - docker run -p 3000:3000 expensetrackerapp
 - Or just `npm install --legacy-peer-deps` & `npm start`
-
-### Screenshots
-
-![alt text](https://github.com/josekron/nestjs-expense-tracker-app/blob/master/expense_tracker_users.png?raw=true)
-
-![alt text](https://github.com/josekron/nestjs-expense-tracker-app/blob/master/expense_tracker_expenses.png?raw=true)
