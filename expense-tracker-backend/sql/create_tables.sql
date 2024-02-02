@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS public.user (
     created_on TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS public.expensedo (
+CREATE TABLE IF NOT EXISTS public.expense (
     expense_id serial NOT NULL,
     user_user_id integer REFERENCES public.user(user_id),
     name VARCHAR(255) NOT NULL,
@@ -13,11 +13,3 @@ CREATE TABLE IF NOT EXISTS public.expensedo (
     created_on TIMESTAMP NOT NULL,
     PRIMARY KEY (expense_id, user_user_id)
 );
-
-CREATE TABLE IF NOT EXISTS public.userbucket {
-    bucket_id serial NOT NULL,
-    user_user_id integer REFERENCES public.user(user_id),
-    name VARCHAR(255) NOT NULL,
-    created_on TIMESTAMP NOT NULL,
-    PRIMARY KEY (bucket_id, user_user_id)
-}
