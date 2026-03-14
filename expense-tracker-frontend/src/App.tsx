@@ -31,15 +31,16 @@ function App() {
   const [currentExpensePage, setCurrentExpensePage] = useState(1);
   const [expenseRecordsPerPage] = useState(5);
 
+  const expenseList = expenses.expenses ?? [];
   const indexOfLastExpenseRecord = currentExpensePage * expenseRecordsPerPage;
   const indexOfFirstExpenseRecord =
     indexOfLastExpenseRecord - expenseRecordsPerPage;
-  const currentExpenseRecords = expenses.expenses.slice(
+  const currentExpenseRecords = expenseList.slice(
     indexOfFirstExpenseRecord,
     indexOfLastExpenseRecord
   );
   const nExpensePages = Math.ceil(
-    expenses.expenses.length / expenseRecordsPerPage
+    expenseList.length / expenseRecordsPerPage
   );
 
   // Users:

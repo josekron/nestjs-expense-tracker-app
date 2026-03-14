@@ -10,7 +10,8 @@ services:
       - POSTGRES_DB=postgres
     container_name: postgres
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      # For Postgres 18+, the image stores data in a version-specific subdir.
+      - ./pgdata:/var/lib/postgresql
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
       - ./sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
     ports:
@@ -23,6 +24,7 @@ services:
     container_name: nest-docker-postgres
     environment:
       - PORT=${PORT}
+      - DB_HOST=db
     ports:
       - '4000:4000'
     depends_on:

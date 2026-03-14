@@ -5,6 +5,9 @@
 /expense-tracker-frontend/node_modules
 /expense-tracker-backend/temp
 
+# Docker / PostgreSQL data
+/expense-tracker-backend/pgdata
+
 # Logs
 logs
 *.log

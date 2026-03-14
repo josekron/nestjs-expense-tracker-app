@@ -2,10 +2,10 @@ FROM node:21-alpine
 
 WORKDIR /react-app
 
-COPY ./package.json /react-app
+COPY ./package.json ./package-lock.json /react-app/
 
-RUN npm install --legacy-peer-deps
+RUN npm ci --legacy-peer-deps
 
 COPY . .
 
-CMD npm start
+CMD ["npm", "start"]

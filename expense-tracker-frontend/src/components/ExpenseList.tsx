@@ -6,7 +6,8 @@ const ExpenseList = (props: any) => {
     props.deleteExpenseHandler(expenseId);
   };
 
-  const renderExpenseList = props.expenses.expenses.map((expense: any) => {
+  const expenseList = props.expenses?.expenses ?? [];
+  const renderExpenseList = expenseList.map((expense: any) => {
     return (
       <tr key={expense.expenseId}>
         <td>{expense.name}</td>
