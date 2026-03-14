@@ -137,46 +137,48 @@ function App() {
     <div>
       <div className="App-header">Expense Tracker</div>
       <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <CreateUser createUserHandler={createUserHandler} />
-                <UserList
-                  users={currentUserRecords}
-                  getSelectedUserId={selectUserHandler}
-                />
-                <Pagination
-                  nPages={nUserPages}
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/expenses/:userId"
-            element={
-              <>
-                <GoBack></GoBack>
-                <AddExpense addExpenseHandler={addExpenseHandler} />
-                <ExpenseList
-                  expenses={{
-                    expenses: currentExpenseRecords,
-                    total: expenses.total,
-                  }}
-                  deleteExpenseHandler={deleteExpenseHandler}
-                />
-                <Pagination
-                  nPages={nExpensePages}
-                  currentPage={currentExpensePage}
-                  setCurrentPage={setCurrentExpensePage}
-                />
-              </>
-            }
-          ></Route>
-        </Routes>
+        <div className="App-content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <CreateUser createUserHandler={createUserHandler} />
+                  <UserList
+                    users={currentUserRecords}
+                    getSelectedUserId={selectUserHandler}
+                  />
+                  <Pagination
+                    nPages={nUserPages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                  />
+                </>
+              }
+            ></Route>
+            <Route
+              path="/expenses/:userId"
+              element={
+                <>
+                  <GoBack></GoBack>
+                  <AddExpense addExpenseHandler={addExpenseHandler} />
+                  <ExpenseList
+                    expenses={{
+                      expenses: currentExpenseRecords,
+                      total: expenses.total,
+                    }}
+                    deleteExpenseHandler={deleteExpenseHandler}
+                  />
+                  <Pagination
+                    nPages={nExpensePages}
+                    currentPage={currentExpensePage}
+                    setCurrentPage={setCurrentExpensePage}
+                  />
+                </>
+              }
+            ></Route>
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

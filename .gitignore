@@ -1,6 +1,7 @@
 # compiled output
 /expense-tracker-backend/dist
 /expense-tracker-backend/node_modules
+/expense-tracker-frontend/build
 /expense-tracker-frontend/dist
 /expense-tracker-frontend/node_modules
 /expense-tracker-backend/temp

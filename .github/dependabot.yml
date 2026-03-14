@@ -1,0 +1,22 @@
+# Dependabot configuration - https://docs.github.com/en/code-security/dependabot
+version: 2
+updates:
+  # Backend (NestJS)
+  - package-ecosystem: "npm"
+    directory: "/expense-tracker-backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps(backend)"
+
+  # Frontend (React)
+  - package-ecosystem: "npm"
+    directory: "/expense-tracker-frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps(frontend)"

@@ -36,4 +36,4 @@ expense-tracker-front (Frontend):
 
 - docker build -t expensetrackerapp .
 - docker run -p 3000:3000 expensetrackerapp
-- Or just `npm install --legacy-peer-deps` & `npm start`
+- Or just `npm install` & `npm start`
