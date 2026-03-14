@@ -3,7 +3,7 @@ import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 
 const config: Options = {
   type: 'postgresql',
-  host: 'localhost',
+  host: process.env.DB_HOST || 'localhost',
   port: 5432,
   user: 'postgres',
   password: 'postgres',
