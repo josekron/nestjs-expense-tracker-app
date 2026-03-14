@@ -54,7 +54,7 @@ export default withRouter(
         <div className="App-container">
           <h3>
             {/* Hey {this.props.router.params.userId}, introduce your expense: */}
-            Hey {this.props.router.location.state.email}, introduce your
+            Hey {this.props.router.location.state?.email ?? `User ${this.props.router.params.userId}`}, introduce your
             expense:
           </h3>
           <form onSubmit={this.addExpense}>
