@@ -6,6 +6,7 @@ import {
   Input,
   ElementLabel,
   Box,
+  ErrorMessage,
 } from "../styles/custom.styled";
 import "../App.css";
 
@@ -19,6 +20,7 @@ type State = {
   name: string;
   description: string;
   total: number;
+  error: string;
 };
 
 export default withRouter(
@@ -27,45 +29,56 @@ export default withRouter(
       name: "",
       description: "",
       total: 0,
+      error: "",
     };
 
-    addExpense = async (event: any) => {
+    addExpense = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      if (
-        this.state.name === "" ||
-        this.state.description === "" ||
-        this.state.total <= 0
-      ) {
-        alert("Please fill all the fields");
+      const { name, description, total } = this.state;
+      if (!name.trim() || !description.trim() || total <= 0) {
+        this.setState({
+          error: "Please fill all fields and use an amount greater than 0.",
+        });
         return;
       }
-
+      this.setState({ error: "" });
       const request = {
         userId: parseInt(this.props.router.params.userId),
-        ...this.state,
+        name: name.trim(),
+        description: description.trim(),
+        total,
       };
-      console.log("input: ", request);
       this.props.addExpenseHandler(request);
       this.setState({ name: "", description: "", total: 0 });
     };
 
     render() {
+      const userEmail =
+        this.props.router.location.state?.email ??
+        `User ${this.props.router.params.userId}`;
       return (
         <div className="App-container">
-          <h3>
-            {/* Hey {this.props.router.params.userId}, introduce your expense: */}
-            Hey {this.props.router.location.state?.email ?? `User ${this.props.router.params.userId}`}, introduce your
-            expense:
-          </h3>
+          <h3>Add expense</h3>
+          <p
+            style={{
+              margin: "0 0 1em",
+              color: "rgba(255,255,255,0.85)",
+              fontSize: "0.95em",
+            }}
+          >
+            Expenses for {userEmail}
+          </p>
           <form onSubmit={this.addExpense}>
             <ElementList>
               <ElementLabel>Name</ElementLabel>
               <Input
                 type="text"
                 value={this.state.name}
-                onChange={(event) =>
-                  this.setState({ name: event.target.value })
+                $hasError={!!this.state.error}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  this.setState({ name: event.target.value, error: "" })
                 }
+                aria-invalid={!!this.state.error}
               />
             </ElementList>
             <ElementList>
@@ -73,27 +86,39 @@ export default withRouter(
               <Input
                 type="text"
                 value={this.state.description}
-                onChange={(event) =>
-                  this.setState({ description: event.target.value })
+                $hasError={!!this.state.error}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  this.setState({ description: event.target.value, error: "" })
                 }
+                aria-invalid={!!this.state.error}
               />
             </ElementList>
             <ElementList>
-              <ElementLabel>Total</ElementLabel>
+              <ElementLabel>Amount</ElementLabel>
               <Input
                 type="number"
+                min="0"
+                step="0.01"
                 value={this.state.total}
-                onChange={(event) =>
-                  this.setState({ total: Number(event.target.value) })
+                $hasError={!!this.state.error}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  this.setState({
+                    total: Number(event.target.value) || 0,
+                    error: "",
+                  })
                 }
+                aria-invalid={!!this.state.error}
               />
             </ElementList>
+            {this.state.error && (
+              <ErrorMessage>{this.state.error}</ErrorMessage>
+            )}
             <Box>
-              <Button>Add</Button>
+              <Button type="submit">Add</Button>
             </Box>
           </form>
         </div>
       );
     }
-  }
+  },
 );

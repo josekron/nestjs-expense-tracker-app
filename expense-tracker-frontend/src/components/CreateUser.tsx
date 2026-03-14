@@ -1,47 +1,60 @@
 import React from "react";
 import "../App.css";
-import { Box, Button, Input } from "../styles/custom.styled";
+import { Box, Button, Input, ErrorMessage } from "../styles/custom.styled";
 
 type Props = {
   createUserHandler: any;
 };
 type State = {
   email: string;
+  error: string;
 };
 
 class CreateUser extends React.Component<Props, State> {
   state: State = {
     email: "",
+    error: "",
   };
+
   createUser = (event: any) => {
     event.preventDefault();
-    if (this.state.email === "") {
-      alert("Please introduce an email");
+    const email = this.state.email.trim();
+    if (email === "") {
+      this.setState({ error: "Please enter an email." });
       return;
     }
-
-    console.log(`Email: ${this.state.email}`);
-    this.props.createUserHandler(this.state);
+    this.setState({ error: "" });
+    this.props.createUserHandler({ email });
     this.setState({ email: "" });
   };
 
   render() {
     return (
       <div className="App-container">
-        <h3>Introduce an email</h3>
+        <h3>Create a user</h3>
         <form onSubmit={this.createUser}>
           <Box>
+            <label htmlFor="create-user-email" className="sr-only">
+              Email
+            </label>
             <Input
-              type="text"
+              id="create-user-email"
+              type="email"
               placeholder="Email"
               value={this.state.email}
+              $hasError={!!this.state.error}
               onChange={(event: any) =>
-                this.setState({ email: event.target.value })
+                this.setState({ email: event.target.value, error: "" })
               }
+              aria-invalid={!!this.state.error}
+              aria-describedby={this.state.error ? "create-user-error" : undefined}
             />
           </Box>
+          {this.state.error && (
+            <ErrorMessage id="create-user-error">{this.state.error}</ErrorMessage>
+          )}
           <Box>
-            <Button>Create User</Button>
+            <Button type="submit">Create User</Button>
           </Box>
         </form>
       </div>
