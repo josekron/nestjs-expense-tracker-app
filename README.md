@@ -2,7 +2,7 @@
 
 Expense Tracker is an example of a full app built with Nestjs (Backend) and React (Frontend)
 
-This project can be improved but it was a take-home test with a time limit.
+This project was a take-home test with a time limit.
 
 ### Technologies
 
