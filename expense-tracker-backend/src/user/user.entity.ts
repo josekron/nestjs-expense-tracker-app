@@ -4,7 +4,7 @@ import {
   OneToMany,
   PrimaryKey,
   Property,
-} from '@mikro-orm/core';
+} from '@mikro-orm/postgresql';
 import { Expense } from '../expense/expense.entity';
 
 @Entity()

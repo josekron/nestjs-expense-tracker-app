@@ -1,8 +1,7 @@
-import { Options } from '@mikro-orm/core';
+import { defineConfig } from '@mikro-orm/postgresql';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 
-const config: Options = {
-  type: 'postgresql',
+export default defineConfig({
   host: process.env.DB_HOST || 'localhost',
   port: 5432,
   user: 'postgres',
@@ -11,6 +10,4 @@ const config: Options = {
   entities: ['dist/**/*.entity.js'],
   entitiesTs: ['src/**/*.entity.ts'],
   metadataProvider: TsMorphMetadataProvider,
-};
-
-export default config;
+});
